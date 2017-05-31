@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Informative Error Messages Example</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+$( document ).ready( function() {
+    $( '#working-example' ).click( function( event ) {
+        event.preventDefault();
+
+        $.ajax( 'error-example/working', {
+            dataType:'json',
+            data:{},
+            type:'POST',
+            success:function ( data ) {
+                //console.log("success: " + data.result);
+                $( '#working-result' ).text( data.result );
+            }
+        })
+        .error( function() {
+            //console.log("error");
+        });
+    });
+
+    $( '#failing-example' ).click( function( event ) {
+        event.preventDefault();
+
+        $.ajax( 'error-example/failing', {
+            dataType:'json',
+            data:{},
+            type:'POST',
+            success:function ( data ) {
+                //console.log("success: " + data.result);
+                $( '#failing-result' ).text( data.result );
+            }
+        })
+                .error( function() {
+                    //console.log("error");
+                });
+    });
+}); // (document).ready
+</script>
+</head>
+<body>
+<div>Informative error message example</div>
+<hr>
+<div>
+    <button id="working-example">Working Example</button><br>
+    <p id="working-result"></p>
+</div>
+<hr>
+<div>
+    <button id="failing-example">Failing Example</button><br>
+    <p style="color:red;" id="failing-result"></p>
+</div>
+
+</body>
+</html>
